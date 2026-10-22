@@ -4,7 +4,7 @@
 **Course:** Operating Systems, FCIM / FAF, UTM, 2026–2027  
 **Checked by:** Reițman Patricia, asist. univ.
 
-Each laboratory work is on its own branch:
+All laboratory works are on the `main` branch, each in its own folder (`lab1/` … `lab5-6/`). Each one is also available on its own branch:
 
 | Branch | Laboratory work | Contents |
 |---|---|---|
