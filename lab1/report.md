@@ -1,9 +1,10 @@
-# Report: Laboratory Work No.1, Operating Systems
+# Report on laboratory work no. 1
 
-**Topic:** The OS as a Resource Manager
-**Student:** Buliga Vladislav, FAF-243
-**Checked by:** Reițman Patricia, asist. univ., DISA, FCIM, UTM
-**Chișinău – 2026**
+**Course:** Operating Systems  
+**Topic:** The OS as a Resource Manager  
+**Done by:** st. gr. FAF-243, Buliga Vladislav  
+**Checked by:** Reițman Patricia, asist. univ.  
+Chișinău, 2026
 
 ---
 
@@ -69,16 +70,16 @@ The laboratory work was carried out on an Ubuntu 24.04 virtual machine in the Ki
 
 Commands used:
 
-```bash
+```
 mkdir -p ~/os-lab1 && cd ~/os-lab1
 whoami      # who am I to the OS
 uname -a    # which kernel is managing this machine
 uptime      # how long has this OS been running
 ```
 
-![Figure 1. Output of whoami, uname -a and uptime](shots/l1_0.png)
+<p align="center"><img src="shots/l1_0.png" alt="Figure 0.1"></p>
 
-*Figure 1. Output of whoami, uname -a and uptime*
+<p align="center"><i>Figure 0.1 – Output of whoami, uname -a and uptime</i></p>
 
 Results:
 
@@ -93,7 +94,7 @@ The directory tree was explored, then a working folder demo was created in which
 
 Commands used:
 
-```bash
+```
 pwd
 ls -la /
 ls -la ~
@@ -113,9 +114,9 @@ ls -l note.txt
 chmod 644 note.txt
 ```
 
-![Figure 2. Contents of /, of the home directory and of /etc; the demo folder after cp and mv](shots/l1_1.png)
+<p align="center"><img src="shots/l1_1.png" alt="Figure 1.1"></p>
 
-*Figure 2. Contents of /, of the home directory and of /etc; the demo folder after cp and mv*
+<p align="center"><i>Figure 1.1 – Contents of /, of the home directory and of /etc; the demo folder after cp and mv</i></p>
 
 Interesting output: ls -la / shows a 1 GB file /swapfile with permissions -rw------- (readable only by root); this is the swap space used by the OS in Task 3. It also shows that bin, lib and sbin are symbolic links (l) to usr/bin, usr/lib and usr/sbin.
 
@@ -132,7 +133,7 @@ The list of processes was examined with ps and top, then a background process wa
 
 Commands used:
 
-```bash
+```
 ps aux | head
 ps aux | wc -l       # how many processes exist right now
 top                  # live view; q to quit
@@ -149,13 +150,13 @@ cat /proc/$PID/status | head -20
 kill $PID
 ```
 
-![Figure 3. Live list of processes in top (PID 1 = systemd, 128 tasks)](shots/l1_2a.png)
+<p align="center"><img src="shots/l1_2a.png" alt="Figure 2.1"></p>
 
-*Figure 3. Live list of processes in top (PID 1 = systemd, 128 tasks)*
+<p align="center"><i>Figure 2.1 – Live list of processes in top (PID 1 = systemd, 128 tasks)</i></p>
 
-![Figure 4. Background sleep process found with ps -ef, and its /proc/<PID>/status](shots/l1_2b.png)
+<p align="center"><img src="shots/l1_2b.png" alt="Figure 2.2"></p>
 
-*Figure 4. Background sleep process found with ps -ef, and its /proc/<PID>/status*
+<p align="center"><i>Figure 2.2 – Background sleep process found with ps -ef, and its /proc/<PID>/status</i></p>
 
 Answers to the questions:
 
@@ -170,7 +171,7 @@ kill does not delete a program; it asks the OS to send the process a signal (SIG
 
 Commands used:
 
-```bash
+```
 free -h                     # total / used / free RAM and swap
 cat /proc/meminfo | head -6
 sleep 300 & PID=$!
@@ -178,9 +179,9 @@ grep VmRSS /proc/$PID/status   # real RAM used by this process
 kill $PID
 ```
 
-![Figure 5. Output of free -h, /proc/meminfo and VmRSS of the sleep process](shots/l1_3.png)
+<p align="center"><img src="shots/l1_3.png" alt="Figure 3.1"></p>
 
-*Figure 5. Output of free -h, /proc/meminfo and VmRSS of the sleep process*
+<p align="center"><i>Figure 3.1 – Output of free -h, /proc/meminfo and VmRSS of the sleep process</i></p>
 
 Answers to the questions:
 
@@ -193,7 +194,7 @@ Answers to the questions:
 
 Commands used:
 
-```bash
+```
 df -h              # mounted filesystems and free space
 lsblk              # the block devices (disks)
 du -sh ~/os-lab1   # size of the work folder
@@ -201,9 +202,9 @@ ls -l /dev | head  # devices presented as files
 mount | head
 ```
 
-![Figure 6. Output of df -h, lsblk, du, ls -l /dev and mount](shots/l1_4.png)
+<p align="center"><img src="shots/l1_4.png" alt="Figure 4.1"></p>
 
-*Figure 6. Output of df -h, lsblk, du, ls -l /dev and mount*
+<p align="center"><i>Figure 4.1 – Output of df -h, lsblk, du, ls -l /dev and mount</i></p>
 
 Answers to the questions:
 
@@ -218,9 +219,9 @@ The command ls -l /dev | head also printed "ls: write error: Broken pipe". This 
 
 htop was installed with apt install -y htop and used instead of top.
 
-![Figure 7. The interactive process viewer htop](shots/l1_5.png)
+<p align="center"><img src="shots/l1_5.png" alt="Figure 5.1"></p>
 
-*Figure 7. The interactive process viewer htop*
+<p align="center"><i>Figure 5.1 – The interactive process viewer htop</i></p>
 
 - htop separates 41 user processes, 66 user threads and 86 kernel threads; 41 + 86 = 127, which matches the ~128 tasks reported by top;
 - PID 1 is shown with its full command /sbin/init, which on Ubuntu is a link to systemd;
@@ -230,9 +231,9 @@ htop was installed with apt install -y htop and used instead of top.
 
 Then strace -c ls was run to count the system calls made by ls.
 
-![Figure 8. System calls made by ls, counted with strace -c](shots/l1_6.png)
+<p align="center"><img src="shots/l1_6.png" alt="Figure 5.2"></p>
 
-*Figure 8. System calls made by ls, counted with strace -c*
+<p align="center"><i>Figure 5.2 – System calls made by ls, counted with strace -c</i></p>
 
 - to list one directory, ls made 70 system calls of 21 different types, which took the kernel about 30 microseconds;
 - most calls only start the program: execve loads ls, and openat, mmap (17 calls) and mprotect load and map the shared libraries into memory;
