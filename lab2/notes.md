@@ -1,9 +1,10 @@
-# Report: Laboratory Work No.2, Operating Systems
+# Report on laboratory work no. 2
 
-**Topic:** Meet the OS You Will Build (xv6)
-**Student:** Buliga Vladislav, FAF-243
-**Checked by:** Reițman Patricia, asist. univ., DISA, FCIM, UTM
-**Chișinău – 2026**
+**Course:** Operating Systems  
+**Topic:** Meet the OS You Will Build (xv6)  
+**Done by:** st. gr. FAF-243, Buliga Vladislav  
+**Checked by:** Reițman Patricia, asist. univ.  
+Chișinău, 2026
 
 ---
 
@@ -58,7 +59,7 @@ New processes are created with fork(), which makes a copy of the calling process
 
 The laboratory work was carried out on an Ubuntu 24.04 virtual machine in the Killercoda online environment. Since the toolchain was not preinstalled there, it was installed first, then the course copy of xv6 was cloned from GitHub.
 
-```bash
+```
 apt update && apt install -y git build-essential qemu-system-misc \
     gcc-riscv64-linux-gnu binutils-riscv64-linux-gnu
 git clone https://github.com/mit-pdos/xv6-riscv ~/xv6-riscv
@@ -70,20 +71,20 @@ cd ~/xv6-riscv
 
 The command make qemu compiled the kernel and all user programs with the RISC-V cross-compiler, created the file system image fs.img and started the emulator. After a few seconds the kernel booted, started the other CPU cores (hart 1 and hart 2) and the init process started the shell, which displayed the $ prompt. To leave xv6 the QEMU sequence Ctrl-A, then X is used.
 
-```bash
+```
 make qemu
 ```
 
-![Figure 1. xv6 booting in QEMU](shots/l2_boot.png)
+<p align="center"><img src="shots/l2_boot.png" alt="Figure 1.1"></p>
 
-*Figure 1. xv6 booting in QEMU*
+<p align="center"><i>Figure 1.1 – xv6 booting in QEMU</i></p>
 
 
 ### 3.2 Task 2 — Using xv6 as a Unix System
 
 At the xv6 prompt the built-in programs were run: ls lists the files of the root directory (name, type, inode number and size), cat prints the README file, echo prints its arguments, ls | grep c filters the list through a pipe and wc counts lines, words and bytes.
 
-```bash
+```
 $ ls
 $ cat README
 $ echo hello xv6
@@ -91,17 +92,25 @@ $ ls | grep c
 $ wc README
 ```
 
-![Figure 2. Contents of the xv6 root directory (ls)](shots/l2_ls.png)
+<p align="center"><img src="shots/l2_ls.png" alt="Figure 2.1"></p>
 
-*Figure 2. Contents of the xv6 root directory (ls)*
+<p align="center"><i>Figure 2.1 – Contents of the xv6 root directory (ls)</i></p>
 
-![Figure 3. The README file of xv6 (cat README)](shots/l2_readme.png)
+<p align="center"><img src="shots/l2_readme.png" alt="Figure 2.2"></p>
 
-*Figure 3. The README file of xv6 (cat README)*
+<p align="center"><i>Figure 2.2 – The README file of xv6 (cat README)</i></p>
 
-![Figure 4. echo, a pipe (ls | grep c) and wc inside xv6](shots/l2_cmds.png)
+<p align="center"><img src="shots/l2_echo.png" alt="Figure 2.3"></p>
 
-*Figure 4. echo, a pipe (ls | grep c) and wc inside xv6*
+<p align="center"><i>Figure 2.3 – echo hello xv6</i></p>
+
+<p align="center"><img src="shots/l2_grep.png" alt="Figure 2.4"></p>
+
+<p align="center"><i>Figure 2.4 – A pipe: ls | grep c</i></p>
+
+<p align="center"><img src="shots/l2_wc.png" alt="Figure 2.5"></p>
+
+<p align="center"><i>Figure 2.5 – wc README</i></p>
 
 Answers to the questions:
 
@@ -116,16 +125,16 @@ wc README printed 48 lines, 336 words and 2441 bytes; the size 2441 is the same 
 
 After quitting QEMU the source tree was examined. The user programs user/ls.c and user/cat.c were read, then the list of system calls available to programs (user/user.h) and the kernel functions that implement read and write were found.
 
-```bash
+```
 sed -n "1,40p" user/ls.c
 sed -n "1,30p" user/cat.c
 cat user/user.h
 grep -n "sys_read\|sys_write" kernel/sysfile.c | head
 ```
 
-![Figure 5. System calls declared in user/user.h and location of sys_read and sys_write](shots/l2_src.png)
+<p align="center"><img src="shots/l2_src.png" alt="Figure 3.1"></p>
 
-*Figure 5. System calls declared in user/user.h and location of sys_read and sys_write*
+<p align="center"><i>Figure 3.1 – System calls declared in user/user.h and location of sys_read and sys_write</i></p>
 
 Answers to the questions:
 
@@ -142,7 +151,7 @@ The program sleep takes one argument, the number of clock ticks to wait. It chec
 
 Source code (user/sleep.c):
 
-```bash
+```
 #include "kernel/types.h"
 #include "user/user.h"
 
@@ -163,7 +172,7 @@ main(int argc, char *argv[])
 
 The program was added to the list of user programs (UPROGS) in the Makefile, so that it is compiled and copied into the file system image:
 
-```bash
+```
 UPROGS=\
     $U/_cat\
     $U/_echo\
@@ -174,9 +183,9 @@ UPROGS=\
 
 Then xv6 was rebuilt with make qemu and the program was tested. Called without arguments it prints the usage message; sleep 10 pauses for 10 ticks (about one second, since the xv6 timer interrupt occurs roughly every 100 ms) and then returns to the prompt.
 
-![Figure 6. Testing sleep and pingpong inside xv6](shots/l2_sleep.png)
+<p align="center"><img src="shots/l2_sleep.png" alt="Figure 4.1"></p>
 
-*Figure 6. Testing sleep and pingpong inside xv6*
+<p align="center"><i>Figure 4.1 – Testing sleep and pingpong inside xv6</i></p>
 
 
 ### 3.5 Additional Task — pingpong
@@ -185,7 +194,7 @@ The program pingpong creates two pipes, one from the parent to the child and one
 
 Source code (user/pingpong.c):
 
-```bash
+```
 #include "kernel/types.h"
 #include "user/user.h"
 
@@ -221,7 +230,7 @@ main(int argc, char *argv[])
 }
 ```
 
-The output (Figure 7) shows "6: received ping" and "5: received pong": the child received PID 6 and the parent PID 5, which confirms that fork() created a new process and that the two processes exchanged data through the kernel.
+The output (Figure 4.1) shows "6: received ping" and "5: received pong": the child received PID 6 and the parent PID 5, which confirms that fork() created a new process and that the two processes exchanged data through the kernel.
 
 
 ## CONCLUSION
