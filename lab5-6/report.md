@@ -400,20 +400,24 @@ $ mystat r2
 $ cat r2 | wc
 ```
 
-<p align="center"><img src="shots/lab6/f2_1.png" alt="Figure 6.2.1"></p>
+<p align="center"><img src="shots/lab6/f2_1a.png" alt="Figure 6.2.1"></p>
 
-<p align="center"><i>Figure 6.2.1 – mystat output before and after ln and rm</i></p>
+<p align="center"><i>Figure 6.2.1 – mystat on README, the root directory and console (typed again after an exec failure)</i></p>
 
-Note: on this ARM virtual machine xv6 sometimes printed "exec <program> failed" for a command that is correct and worked when typed again; this is a transient problem of running the RISC-V emulator, not of the programs. Figure 6.2.1 is therefore assembled from two runs on a freshly built disk (make clean ; make qemu): the first lines from one run and the ln/rm sequence from the other; the outputs are identical.
+<p align="center"><img src="shots/lab6/f2_1b.png" alt="Figure 6.2.2"></p>
+
+<p align="center"><i>Figure 6.2.2 – Watching the link count with mystat: ln, then rm</i></p>
+
+Note: on this ARM virtual machine xv6 sometimes printed "exec <program> failed" for a command that is correct and worked when typed again; this is a transient problem of running the RISC-V emulator, not of the programs. Figures 6.2.1 and 6.2.2 come from two separate runs, each on a freshly built disk (make clean ; make qemu); in Figure 6.2.1 the first attempt failed and the same command was typed again.
 
 ```
 grep -n "nlink--" kernel/sysfile.c
 sed -n '/struct dinode/,/};/p' kernel/fs.h
 ```
 
-<p align="center"><img src="shots/lab6/f2_2.png" alt="Figure 6.2.2"></p>
+<p align="center"><img src="shots/lab6/f2_2.png" alt="Figure 6.2.3"></p>
 
-<p align="center"><i>Figure 6.2.2 – The link count decrement in sys_unlink and struct dinode</i></p>
+<p align="center"><i>Figure 6.2.3 – The link count decrement in sys_unlink and struct dinode</i></p>
 
 Answers to the questions:
 
@@ -543,9 +547,13 @@ $ find . r2
 $ find a b
 ```
 
-<p align="center"><img src="shots/lab6/f4_1.png" alt="Figure 6.4.1"></p>
+<p align="center"><img src="shots/lab6/f4_tree.png" alt="Figure 6.4.1"></p>
 
-<p align="center"><i>Figure 6.4.1 – Testing find on a fresh disk</i></p>
+<p align="center"><i>Figure 6.4.1 – Creating the test tree on a fresh disk</i></p>
+
+<p align="center"><img src="shots/lab6/f4_find.png" alt="Figure 6.4.2"></p>
+
+<p align="center"><i>Figure 6.4.2 – Testing find</i></p>
 
 find . r2 printed the three paths ./r2, ./a/b/r2 and ./a/r2, and find a b printed a/b, as expected (the order follows the order of the entries in each directory). The listing of a also confirms Part 1: a now has four entries (., .., b and r2), so its size grew to 4 × 16 = 64 bytes, and a/b, with three entries, has 48 bytes.
 
@@ -556,9 +564,9 @@ $ find . r2 -n
 $ mystat cat
 ```
 
-<p align="center"><img src="shots/lab6/f4_2.png" alt="Figure 6.4.2"></p>
+<p align="center"><img src="shots/lab6/f4_n.png" alt="Figure 6.4.3"></p>
 
-<p align="center"><i>Figure 6.4.2 – find with inode numbers, compared with cat</i></p>
+<p align="center"><i>Figure 6.4.3 – find with inode numbers, compared with cat</i></p>
 
 With -n, ./r2 has inode 3, the same as cat (mystat cat shows inode 3, links 2), so ./r2 and cat are the same file: ln cat r2 only added a second name. The other two, ./a/r2 and ./a/b/r2, have their own inodes (29 and 28): they are different files that only happen to have the same name.
 
