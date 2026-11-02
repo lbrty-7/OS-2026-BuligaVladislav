@@ -1,0 +1,11 @@
+Lab 10 - notes (answers to the Observe box)
+Buliga Vladislav, FAF-243
+Full report with screenshots: report.md / Lab9-10_BuligaVladislav_FAF-243.docx
+
+1. Because the mask 32 has only one bit on, bit 5, and 5 is SYS_read. open is call 15 and close is call 21, and their bits are 0 in the mask, so the test (p->trace_mask >> num) & 1 is false for them and nothing is printed.
+
+2. The line np->trace_mask = p->trace_mask; added in fork (kfork) in kernel/proc.c. Every child copies the mask of its parent, so the children and grandchildren of usertests are traced too, and each of them prints its own pid.
+
+3. echo calls write twice: once for the argument "hi" (2 bytes) and once for the final "\n" (1 byte). The trace line is printed by the kernel after each write returns, so the first trace line appears right after "hi", before the second write prints the new line.
+
+4. The mask with bit 15 (open) and bit 21 (close): 2^15 + 2^21 = 32768 + 2097152 = 2129920. trace 2129920 grep hello README printed only open -> 3 and close -> 0.

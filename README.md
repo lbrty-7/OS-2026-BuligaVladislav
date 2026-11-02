@@ -4,7 +4,7 @@
 **Course:** Operating Systems, FCIM / FAF, UTM, 2026–2027  
 **Checked by:** Reițman Patricia, asist. univ.
 
-Each laboratory work is on its own branch:
+All laboratory works are on the `main` branch, each in its own folder (`lab1/` … `lab9-10/`). Each one is also available on its own branch:
 
 | Branch | Laboratory work | Contents |
 |---|---|---|
@@ -13,5 +13,7 @@ Each laboratory work is on its own branch:
 | `lab3` | Lab 3 – The Command Line: Shell, Pipes and Text Filters | report, `oneliners.sh`, `report.sh`, screenshots |
 | `lab4` | Lab 4 – The xv6 Shell from the Outside | report, `sleep.c`, `args.c`, `args_linux.c`, `Makefile`, screenshots |
 | `lab5-6` | Labs 5–6 – The File System (Linux and xv6), one combined report | report, `mystat.c`, `find.c`, `Makefile`, screenshots |
+| `lab7-8` | Labs 7–8 – Processes and Pipes (Linux and xv6), one combined report | report, `run.c`, `zombie.c`, `redirect.c`, `pipeline.c`, `pipeline3.c`, xv6 `user/run.c`, `pingpong.c`, `primes.c`, `Makefile`, screenshots |
+| `lab9-10` | Labs 9–10 – System Calls (strace on Linux, a new `trace` system call in xv6), one combined report | report, `syscalls.c`, xv6 `trace` changes (`trace.patch` + changed files), `notes.txt`, screenshots |
 
 The xv6 programs go into `~/xv6-riscv/user/`, with a line `$U/_NAME\` added to `UPROGS` in the Makefile.
